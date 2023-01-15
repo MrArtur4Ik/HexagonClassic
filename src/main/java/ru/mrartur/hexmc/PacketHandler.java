@@ -42,6 +42,7 @@ public class PacketHandler implements Runnable {
                 Location location = new Location(world.getWidth()/2.f, world.getHeight()/2.f+2, world.getDepth()/2.f, 0.f, 0.f, server.defaultWorld);
                 Player newPlayer = new Player(location,
                         newEntityID, new GameProfile(packet.username), connection);
+                server.getEntities().add(newPlayer);
                 newPlayer.spawn();
                 Connection c = server.getConnections().get(connection);
                 c.setAuthorized(true);

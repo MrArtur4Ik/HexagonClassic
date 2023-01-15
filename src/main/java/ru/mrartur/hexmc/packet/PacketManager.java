@@ -20,9 +20,7 @@ public class PacketManager {
                     packet.deserialize(inputStream);
                     return packet;
                 }
-            }catch (InstantiationException | IllegalAccessException ignored) {
-                System.out.println("huytest");
-            }
+            }catch (InstantiationException | IllegalAccessException ignored) { }
         }
         throw new IllegalArgumentException("Unknown packet ID: " + packetID);
     }

@@ -32,7 +32,13 @@ public class ClassicServer {
         return entities;
     }
     public List<Player> getPlayersOnline(){
-        return entities.stream().filter(entity -> !(entity instanceof Player)).map(entity -> (Player) entity).toList();
+        List<Player> players = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Player player){
+                players.add(player);
+            }
+        }
+        return players;
     }
     public byte getNewEntityID(){
         for(byte i = 0; i < 127; i++){

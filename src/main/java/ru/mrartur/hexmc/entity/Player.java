@@ -33,8 +33,12 @@ public class Player extends Entity {
         }
     }
     public void spawn(){
-        ClassicServer.getServer().getPlayersOnline().stream()
-                .filter(player -> player.getWorld().equals(getWorld()))
+        getWorld().getPlayers().stream()
+                .filter(player -> !player.equals(this))
                 .forEach(player -> player.sendPacket(new SpawnPlayer(getEntityID(), getName(), getLocation())));
+        sendPacket(new SpawnPlayer((byte) -1, getName(), getLocation()));
+        getWorld().getPlayers().stream()
+                .filter(player -> !player.equals(this))
+                .forEach(player -> sendPacket(new SpawnPlayer(player.getEntityID(), player.getName(), player.getLocation())));
     }
 }
