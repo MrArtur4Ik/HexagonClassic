@@ -11,12 +11,14 @@ public class PlayerIdentification implements PacketSerializer {
     public String username;
     public String key;
     public byte unused;
+
     /*public PlayerIdentification(byte protocolVersion, String username, String key, byte unused){
 
     }*/
-    public PlayerIdentification(){
+    public PlayerIdentification() {
 
     }
+
     @Override
     public int getPacketID() {
         return 0;

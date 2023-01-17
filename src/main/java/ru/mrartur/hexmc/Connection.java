@@ -5,7 +5,8 @@ import ru.mrartur.hexmc.entity.Player;
 public class Connection {
     private boolean authorized = false;
     private Player player;
-    public Connection(){
+
+    public Connection() {
 
     }
 

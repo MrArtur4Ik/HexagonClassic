@@ -6,9 +6,11 @@ import java.io.IOException;
 
 public class UpdateUserType implements PacketSerializer {
     public byte userType;
-    public UpdateUserType(byte userType){
+
+    public UpdateUserType(byte userType) {
         this.userType = userType;
     }
+
     @Override
     public int getPacketID() {
         return 0x0f;

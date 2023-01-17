@@ -10,16 +10,19 @@ public class SetBlockToServer implements PacketSerializer {
     public short z;
     public byte mode;
     public int blockType;
-    public SetBlockToServer(){
+
+    public SetBlockToServer() {
 
     }
-    public SetBlockToServer(short x, short y, short z, byte mode, int blockType){
+
+    public SetBlockToServer(short x, short y, short z, byte mode, int blockType) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.mode = mode;
         this.blockType = blockType;
     }
+
     @Override
     public int getPacketID() {
         return 0x05;

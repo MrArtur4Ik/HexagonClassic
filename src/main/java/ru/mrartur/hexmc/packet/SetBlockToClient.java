@@ -9,12 +9,14 @@ public class SetBlockToClient implements PacketSerializer {
     public short y;
     public short z;
     public int blockType;
-    public SetBlockToClient(short x, short y, short z, int blockType){
+
+    public SetBlockToClient(short x, short y, short z, int blockType) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.blockType = blockType;
     }
+
     @Override
     public int getPacketID() {
         return 6;

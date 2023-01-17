@@ -10,20 +10,23 @@ import java.util.List;
 
 public class PacketManager {
     public static List<Class<? extends PacketSerializer>> packets = new ArrayList<>();
+
     public static PacketSerializer readPacket(Socket connection) throws IOException {
         DataInputStream inputStream = new DataInputStream(connection.getInputStream());
         int packetID = inputStream.readUnsignedByte();
-        for(Class<? extends PacketSerializer> packetClass : packets){
+        for (Class<? extends PacketSerializer> packetClass : packets) {
             try {
-                PacketSerializer packet = packetClass.newInstance();
+                PacketSerializer packet = packetClass.getDeclaredConstructor().newInstance();
                 if (packet.getPacketID() == packetID && packet.getDirection().isServerBound()) {
                     packet.deserialize(inputStream);
                     return packet;
                 }
-            }catch (InstantiationException | IllegalAccessException ignored) { }
+            } catch (Exception ignored) {
+            }
         }
         throw new IllegalArgumentException("Unknown packet ID: " + packetID);
     }
+
     public static void sendPacket(Socket connection, PacketSerializer packetSerializer) throws IOException {
         DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

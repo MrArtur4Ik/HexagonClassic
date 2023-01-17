@@ -6,9 +6,11 @@ import java.io.IOException;
 
 public class DespawnPlayer implements PacketSerializer {
     public byte playerID;
-    public DespawnPlayer(byte playerID){
+
+    public DespawnPlayer(byte playerID) {
         this.playerID = playerID;
     }
+
     @Override
     public int getPacketID() {
         return 0x0c;

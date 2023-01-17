@@ -5,7 +5,8 @@ import ru.mrartur.hexmc.world.World;
 public class Location {
     private float x, y, z, yaw, pitch;
     private World world;
-    public Location(float x, float y, float z, float yaw, float pitch, World world){
+
+    public Location(float x, float y, float z, float yaw, float pitch, World world) {
         this.x = x;
         this.y = y;
         this.z = z;

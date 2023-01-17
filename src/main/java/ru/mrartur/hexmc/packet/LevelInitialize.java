@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class LevelInitialize implements PacketSerializer{
+public class LevelInitialize implements PacketSerializer {
     @Override
     public int getPacketID() {
         return 2;

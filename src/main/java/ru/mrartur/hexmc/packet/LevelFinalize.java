@@ -8,11 +8,13 @@ public class LevelFinalize implements PacketSerializer {
     public short x;
     public short y;
     public short z;
-    public LevelFinalize(short xSize, short ySize, short zSize){
+
+    public LevelFinalize(short xSize, short ySize, short zSize) {
         x = xSize;
         y = ySize;
         z = zSize;
     }
+
     @Override
     public int getPacketID() {
         return 4;

@@ -7,10 +7,12 @@ import java.io.IOException;
 public class LevelDataChunk implements PacketSerializer {
     public byte[] chunkData;
     public byte percentComplete;
-    public LevelDataChunk(byte[] chunkData, byte percentComplete){
+
+    public LevelDataChunk(byte[] chunkData, byte percentComplete) {
         this.chunkData = chunkData;
         this.percentComplete = percentComplete;
     }
+
     @Override
     public int getPacketID() {
         return 3;
@@ -23,11 +25,9 @@ public class LevelDataChunk implements PacketSerializer {
 
     @Override
     public void serialize(DataOutputStream outputStream) throws IOException {
-        if(chunkData.length > 1024) throw new IllegalArgumentException("Chunk data size is greater than 1024 bytes.");
+        if (chunkData.length > 1024) throw new IllegalArgumentException("Chunk data size is greater than 1024 bytes.");
         byte[] data = new byte[1024];
-        for(int i = 0; i < chunkData.length; i++){
-            data[i] = chunkData[i];
-        }
+        System.arraycopy(chunkData, 0, data, 0, chunkData.length);
         outputStream.writeShort(chunkData.length);
         outputStream.write(data);
         outputStream.writeByte(percentComplete);

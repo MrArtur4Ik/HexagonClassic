@@ -9,13 +9,16 @@ import java.io.IOException;
 public class Message implements PacketSerializer {
     public byte playerID;
     public String message;
-    public Message(){
+
+    public Message() {
 
     }
-    public Message(byte playerID, String message){
+
+    public Message(byte playerID, String message) {
         this.playerID = playerID;
         this.message = message;
     }
+
     @Override
     public int getPacketID() {
         return 0x0d;

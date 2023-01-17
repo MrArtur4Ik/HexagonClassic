@@ -6,11 +6,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class DisconnectPlayer implements PacketSerializer{
+public class DisconnectPlayer implements PacketSerializer {
     public String reason;
-    public DisconnectPlayer(String reason){
+
+    public DisconnectPlayer(String reason) {
         this.reason = reason;
     }
+
     @Override
     public int getPacketID() {
         return 0x0e;

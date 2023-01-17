@@ -14,10 +14,12 @@ public class SetPosition implements PacketSerializer {
     public float z;
     public float yaw;
     public float pitch;
-    public SetPosition(){
+
+    public SetPosition() {
 
     }
-    public SetPosition(byte playerID, float x, float y, float z, float yaw, float pitch){
+
+    public SetPosition(byte playerID, float x, float y, float z, float yaw, float pitch) {
         this.playerID = playerID;
         this.x = x;
         this.y = y;
@@ -25,7 +27,8 @@ public class SetPosition implements PacketSerializer {
         this.yaw = yaw;
         this.pitch = pitch;
     }
-    public SetPosition(byte playerID, Location location){
+
+    public SetPosition(byte playerID, Location location) {
         this.playerID = playerID;
         this.x = location.getX();
         this.y = location.getY();
@@ -33,6 +36,7 @@ public class SetPosition implements PacketSerializer {
         this.yaw = location.getYaw();
         this.pitch = location.getPitch();
     }
+
     @Override
     public int getPacketID() {
         return 8;

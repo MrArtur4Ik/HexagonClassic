@@ -1,20 +1,26 @@
 package ru.mrartur.hexmc;
 
 import ru.mrartur.hexmc.entity.Player;
-import ru.mrartur.hexmc.packet.*;
+import ru.mrartur.hexmc.packet.PacketManager;
+import ru.mrartur.hexmc.packet.PacketSerializer;
+import ru.mrartur.hexmc.packet.Ping;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ConnectionHandler implements Runnable {
-    private ClassicServer server;
-    private Socket connection;
-    public ConnectionHandler(ClassicServer server, Socket connection){
+    private final ClassicServer server;
+    private final Socket connection;
+
+    public ConnectionHandler(ClassicServer server, Socket connection) {
         this.server = server;
         this.connection = connection;
     }
+
     @Override
     public void run() {
         System.out.println(connection.getInetAddress().getHostAddress() + ":" + connection.getPort() + " connected!");
@@ -24,18 +30,19 @@ public class ConnectionHandler implements Runnable {
         executor.scheduleAtFixedRate(() -> {
             try {
                 PacketManager.sendPacket(connection, new Ping());
-            } catch (IOException ignored) { }
+            } catch (IOException ignored) {
+            }
         }, 10, 10, TimeUnit.SECONDS);
-        while(connection.isConnected()) {
+        while (connection.isConnected()) {
             try {
                 PacketSerializer packetSerializer = PacketManager.readPacket(connection);
                 new Thread(new PacketHandler(server, connection, packetSerializer), "PacketHandler-" + random.nextInt(100000, 999999)).start();
-            }catch(IOException e){
+            } catch (IOException e) {
                 break;
             }
         }
-        if(server.getConnections().containsKey(connection)){
-            if(server.getConnections().get(connection).isAuthorized()) {
+        if (server.getConnections().containsKey(connection)) {
+            if (server.getConnections().get(connection).isAuthorized()) {
                 Player player = server.getConnections().get(connection).getPlayer();
                 player.destroy();
                 server.broadcast(player.getName() + " left the game.");

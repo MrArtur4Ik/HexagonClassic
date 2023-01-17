@@ -1,6 +1,5 @@
 package ru.mrartur.hexmc.entity;
 
-import ru.mrartur.hexmc.ClassicServer;
 import ru.mrartur.hexmc.location.Location;
 import ru.mrartur.hexmc.packet.PacketManager;
 import ru.mrartur.hexmc.packet.PacketSerializer;
@@ -11,19 +10,23 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Player extends Entity {
-    private GameProfile profile;
-    private Socket connection;
+    private final GameProfile profile;
+    private final Socket connection;
+
     public Player(Location location, byte entityID, GameProfile profile, Socket connection) {
         super(location, entityID);
         this.profile = profile;
         this.connection = connection;
     }
-    public String getName(){
-        return profile.getNickname();
+
+    public String getName() {
+        return profile.nickname();
     }
+
     public GameProfile getProfile() {
         return profile;
     }
+
     public boolean sendPacket(PacketSerializer packet) {
         try {
             PacketManager.sendPacket(connection, packet);
@@ -32,7 +35,8 @@ public class Player extends Entity {
             return false;
         }
     }
-    public void spawn(){
+
+    public void spawn() {
         getWorld().getPlayers().stream()
                 .filter(player -> !player.equals(this))
                 .forEach(player -> player.sendPacket(new SpawnPlayer(getEntityID(), getName(), getLocation())));

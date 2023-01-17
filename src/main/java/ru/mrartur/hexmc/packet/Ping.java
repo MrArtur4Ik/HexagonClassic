@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Ping implements PacketSerializer{
+public class Ping implements PacketSerializer {
     @Override
     public int getPacketID() {
         return 1;
