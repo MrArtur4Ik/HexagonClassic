@@ -82,6 +82,7 @@ public class ClassicServer {
         }));
         defaultWorld = new World((short) 256, (short) 64, (short) 256);
         defaultWorld.generate(new FlatGenerator());
+        System.out.println("Server started on port " + serverSocket.getLocalPort());
         while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept();

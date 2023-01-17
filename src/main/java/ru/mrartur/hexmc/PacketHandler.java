@@ -57,7 +57,7 @@ public class PacketHandler implements Runnable {
                     return;
                 }
                 Player player = server.getConnections().get(connection).getPlayer();
-                server.broadcast("<" + player.getName() + "> " + packet.message.replace("%", "&"), (byte) player.getEntityID());
+                server.broadcast(player.getName() + ": " + packet.message.replace("%", "&"), (byte) player.getEntityID());
             }else if(packetSerializer instanceof SetBlockToServer packet){
                 byte blockType = packet.mode == 0 ? (byte) 0 : (byte) packet.blockType;
                 if(server.defaultWorld.getBlock(packet.x, packet.y, packet.z) != blockType){
